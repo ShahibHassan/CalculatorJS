@@ -26,16 +26,20 @@ console.log(divide(10, 2));
 function operate(operator) {
   switch (operator) {
     case '+':
-      return num1 + num2;
+      return add(num1, num2);
       break;
     case '-':
-      return num1 - num2;
+      return subtract(num1, num2);
       break;
     case '*':
-      return num1 * num2;
+      return multiply(num1, num2);
       break;
     case '/':
-      return num1 / num2;
+      return divide(num1, num2);
       break;
   }
+}
+
+function populateDisplay() {
+  const btns = document.querySelectorAll('.btn');
 }
