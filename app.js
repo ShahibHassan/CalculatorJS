@@ -1,6 +1,11 @@
-let num1;
-let operator;
-let num2;
+let num1 = '';
+let operator = null;
+let num2 = '';
+let equation = '';
+
+const btns = document.querySelectorAll('.btn');
+const operators = document.querySelectorAll('.operator');
+const display = document.getElementById('display');
 
 function add(a, b) {
   return a + b;
@@ -17,11 +22,6 @@ function multiply(a, b) {
 function divide(a, b) {
   return a / b;
 }
-
-console.log(add(10, 2));
-console.log(subtract(10, 2));
-console.log(multiply(10, 2));
-console.log(divide(10, 2));
 
 function operate(operator) {
   switch (operator) {
@@ -41,5 +41,31 @@ function operate(operator) {
 }
 
 function populateDisplay() {
-  const btns = document.querySelectorAll('.btn');
+  btns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      equation += btn.innerHTML;
+      display.innerHTML = equation;
+
+      if (btn.innerHTML === 'C') {
+        clear()
+      }
+      
+      
+    });
+  });
+
+  
+  }
 }
+
+function clear() {
+  display.innerHTML = '';
+}
+
+function calculate() {
+  populateDisplay();
+
+  // check to see if clear is clicked
+}
+
+calculate();

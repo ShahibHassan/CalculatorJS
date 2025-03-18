@@ -35,7 +35,7 @@ body {
     gap: 0px;
 }
 
-.btn{
+.btn, .operator, #sum, #clear{
     padding: 0px;
     margin: 0px;
     display: flex;
@@ -58,6 +58,6 @@ body {
     height: 50px;
 }
 
-.btn:hover{
+.btn:hover, .operator:hover, #sum:hover, #clear:hover{
     background-color:#1e2726;
 }
