@@ -6,6 +6,7 @@ let equation = '';
 const btns = document.querySelectorAll('.btn');
 const operators = document.querySelectorAll('.operator');
 const display = document.getElementById('display');
+const sum = document.getElementById('sum');
 
 function add(a, b) {
   return a + b;
@@ -23,8 +24,8 @@ function divide(a, b) {
   return a / b;
 }
 
-function operate(operator) {
-  switch (operator) {
+function operate(num1, num2, op) {
+  switch (op) {
     case '+':
       return add(num1, num2);
       break;
@@ -47,25 +48,39 @@ function populateDisplay() {
       display.innerHTML = equation;
 
       if (btn.innerHTML === 'C') {
-        clear()
+        clear();
       }
-      
-      
     });
   });
-
-  
-  }
 }
 
 function clear() {
   display.innerHTML = '';
+  equation = '';
+  num1 = '';
+  num2 = '';
+  operator = '';
+  splitUp = [];
 }
 
-function calculate() {
+function calculator() {
   populateDisplay();
 
-  // check to see if clear is clicked
+  sum.addEventListener('click', () => {
+    //equation is my expression
+
+    let splitUp = equation.match(/[^\d()]+|[\d.]+/g);
+    display.innerHTML = '';
+
+    //store values into variables
+
+    num1 = parseInt(splitUp[0]);
+    operator = splitUp[1];
+    num2 = parseInt(splitUp[2]);
+
+    //display answer
+    display.innerHTML = operate(num1, num2, operator);
+  });
 }
 
-calculate();
+calculator();
