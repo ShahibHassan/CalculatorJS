@@ -34,11 +34,11 @@ function divide(a, b) {
 function operate(num1, num2, op) {
   switch (op) {
     case '+':
-      return add(num1, num2);
+      return Math.round(add(num1, num2) * 100) / 100;
     case '-':
-      return subtract(num1, num2);
+      return Math.round(subtract(num1, num2) * 100) / 100;
     case '*':
-      return multiply(num1, num2);
+      return Math.round(multiply(num1, num2) * 100) / 100;
     case '/':
       return Math.round(divide(num1, num2) * 100) / 100;
   }
