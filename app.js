@@ -1,14 +1,15 @@
 // ---Calculator state variables---
 let num1 = null,
   operator = null,
-  num2 = null;
-let equation = '';
+  num2 = null,
+  equation = '',
+  lastResult = null;
 
 // ---Select DOM elements---
 const btns = document.querySelectorAll('.btn');
 const display = document.getElementById('display');
 const sum = document.getElementById('sum');
-
+const oprtr = document.querySelectorAll('.operator');
 // ---Arithmetic functions---
 function add(a, b) {
   return a + b;
@@ -24,7 +25,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
   if (b === 0) {
-    return 'ERROR'; // prevents division by 0
+    return b === 0 ? 'ERROR' : a / b;
   }
   return a / b;
 }
@@ -39,15 +40,15 @@ function operate(num1, num2, op) {
     case '*':
       return multiply(num1, num2);
     case '/':
-      return divide(num1, num2);
+      return Math.round(divide(num1, num2) * 100) / 100;
   }
 }
 
 // ---Clears calculator values---
 function clear(keepDisplay = false) {
   equation = '';
-  num1 = '';
-  num2 = '';
+  num1 = null;
+  num2 = null;
   operator = null;
 
   if (!keepDisplay) {
@@ -64,7 +65,20 @@ function populateDisplay() {
         clear();
         return;
       }
-      equation += value;
+
+      // ✅ Handle cases where lastResult exists
+      if (lastResult !== null) {
+        if (!isNaN(value)) {
+          // ✅ If a number is clicked, reset equation with new number
+          equation = value;
+        } else {
+          // ✅ If an operator is clicked, continue using lastResult
+          equation = lastResult + value;
+        }
+        lastResult = null; // ✅ Reset lastResult after using it
+      } else {
+        equation += value;
+      }
       display.innerHTML = equation;
     });
   });
@@ -96,20 +110,21 @@ function calculator() {
       // iterate i by 2 each time so i lands on operators
       operator = splitUp[i];
       num2 = parseFloat(splitUp[i + 1]);
-      num1 = operate(num1, num2, operator); // perform calculation
-      AV;
 
       // if num1 or num2 aren't numbers return error
-      if (isNaN(num1) || isNaN(num2)) {
+      if (isNaN(num1) || isNaN(num2) || isNaN(splitUp[splitUp.length - 1])) {
         display.innerHTML = 'ERROR';
         clear(true);
         console.log('empty: ' + splitUp); // pass 'true' to keep error message on display
         return;
       }
 
-      display.innerHTML = num1;
+      num1 = operate(num1, num2, operator); // perform calculation
+
       console.log(num1);
     }
+    lastResult = num1;
+    display.innerHTML = num1;
   });
 }
 
