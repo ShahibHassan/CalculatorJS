@@ -61,9 +61,20 @@ function populateDisplay() {
   btns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const value = btn.innerHTML;
-      if (btn.innerHTML === 'C') {
+
+      if (btn.innerHTML === 'Clear') {
         clear();
         return;
+      }
+
+      //stop pressing decimal more than once
+      if (value === '.') {
+        const parts = equation.split(/[\+\-\*\/]/);
+        const currentNumber = parts[parts.length - 1] || '';
+
+        if (currentNumber.includes('.')) {
+          return; // Don't allow another decimal in the current number
+        }
       }
 
       // ✅ Handle cases where lastResult exists
@@ -79,6 +90,7 @@ function populateDisplay() {
       } else {
         equation += value;
       }
+
       display.innerHTML = equation;
     });
   });

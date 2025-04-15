@@ -6,6 +6,11 @@
 body {
     color: whitesmoke;
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border: 1px solid red;
 }
 
 .calculator  {
@@ -13,7 +18,7 @@ body {
     margin: 20px;
     display: flex;
     width: 330px;
-    height: 280px;
+    height: 500px;
     flex-direction: column;
     align-items: center;
     border: .5px solid whitesmoke;
@@ -21,6 +26,8 @@ body {
     background-color: #141517;
     gap: 10px;
 }
+
+
 
 .row {
     display: flex;
@@ -36,28 +43,49 @@ body {
 }
 
 .btn, .operator, #sum, #clear{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0px;
     margin: 0px;
     display: flex;
     font-size: 40px;
     width: 75px;
+    height: 75px;
     border-radius: 10px;
     gap: 10px;
     justify-content: center;
     }
 
 #display {
-    display: flex;
+    padding: 10px 0px;
+    display: block;
     align-items: center;
     justify-content: right;
     font-size: 30px;
     background-color: #1e2726;
     width:100%;
     padding-right: 10px;
-    border-radius: 10px;
-    height: 50px;
+    border-top-right-radius: 10px;
+    border-top-left-radius:10px ;
+    height: 80px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+    text-align: right;
+    overflow: auto;
+    
 }
 
-.btn:hover, .operator:hover, #sum:hover, #clear:hover{
+.btn:hover, .operator:hover, #sum:hover, #clear:hover, #backspace:hover{
     background-color:#1e2726;
+}
+
+#clear {
+        background-color: #181d1d;
+}
+#clear,#backspace {
+    width: 160px;
+    height: 50px;
+    font-size: 20px;
 }
