@@ -67,6 +67,14 @@ function populateDisplay() {
         return;
       }
 
+      // Remove last digit from
+      if (btn.innerHTML === 'BackSpace') {
+        equation = equation.slice(0, -1);
+        console.log(equation);
+        display.innerHTML = equation;
+        return;
+      }
+
       //stop pressing decimal more than once
       if (value === '.') {
         const parts = equation.split(/[\+\-\*\/]/);
